@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Wildfires</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -51,5 +53,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to determine location on the map</string>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoibnN1dHRlciIsImEiOiJjanJ5MTVsaXAwdGc1NDRvOWp1NTFlbW9hIn0.6vkHeX5NgiDzvPXMgCqsWw</string>
 </dict>
 </plist>

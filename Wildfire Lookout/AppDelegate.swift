@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var secret = ""
+        // Do any additional setup after loading the view, typically from a nib.
+        if let path = Bundle.main.path(forResource: "GoogleMapsKeys", ofType: "plist") {
+            let keys = NSDictionary(contentsOfFile: path)
+            secret = keys?.value(forKey: "MapsKey") as! String
+        } else {
+            print("unable to get keys")
+        }
+        
+        GMSServices.provideAPIKey(secret)
+        
+        
         return true
     }
 
