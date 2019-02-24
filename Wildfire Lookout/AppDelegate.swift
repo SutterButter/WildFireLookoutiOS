@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMaps
+import Firebase
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // Set up Google Maps
         var secret = ""
-        // Do any additional setup after loading the view, typically from a nib.
         if let path = Bundle.main.path(forResource: "GoogleMapsKeys", ofType: "plist") {
             let keys = NSDictionary(contentsOfFile: path)
             secret = keys?.value(forKey: "MapsKey") as! String
@@ -29,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(secret)
         
+        // Set up firestore
+        FirebaseApp.configure()
+        
+
         
         return true
     }

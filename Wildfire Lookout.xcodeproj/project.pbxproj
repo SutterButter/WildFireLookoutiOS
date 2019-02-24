@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0AFDF53EA3B4514FD3FC3254 /* Pods_Wildfire_LookoutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9A50AF1866477891EAE86D /* Pods_Wildfire_LookoutTests.framework */; };
+		4F92E65E2220CAFC0002C442 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */; };
+		4F92E660222347FB0002C442 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92E65F222347FB0002C442 /* LogInViewController.swift */; };
+		4F92E662222364D80002C442 /* CreateNewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92E661222364D80002C442 /* CreateNewUserViewController.swift */; };
 		4FD60B26220D46F0004CB4CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B25220D46F0004CB4CF /* AppDelegate.swift */; };
 		4FD60B28220D46F0004CB4CF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B27220D46F0004CB4CF /* FirstViewController.swift */; };
-		4FD60B2A220D46F0004CB4CF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B29220D46F0004CB4CF /* SecondViewController.swift */; };
+		4FD60B2A220D46F0004CB4CF /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B29220D46F0004CB4CF /* MapsViewController.swift */; };
 		4FD60B2D220D46F0004CB4CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD60B2B220D46F0004CB4CF /* Main.storyboard */; };
 		4FD60B2F220D46F2004CB4CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD60B2E220D46F2004CB4CF /* Assets.xcassets */; };
 		4FD60B32220D46F2004CB4CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FD60B30220D46F2004CB4CF /* LaunchScreen.storyboard */; };
@@ -41,10 +44,13 @@
 /* Begin PBXFileReference section */
 		39D8C3AA14D879212A300BCA /* Pods-Wildfire LookoutUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildfire LookoutUITests.release.xcconfig"; path = "Target Support Files/Pods-Wildfire LookoutUITests/Pods-Wildfire LookoutUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3E403D7FD4892D3828134AAE /* Pods-Wildfire LookoutUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildfire LookoutUITests.debug.xcconfig"; path = "Target Support Files/Pods-Wildfire LookoutUITests/Pods-Wildfire LookoutUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4F92E65F222347FB0002C442 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		4F92E661222364D80002C442 /* CreateNewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewUserViewController.swift; sourceTree = "<group>"; };
 		4FD60B22220D46F0004CB4CF /* Wildfire Lookout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wildfire Lookout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD60B25220D46F0004CB4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FD60B27220D46F0004CB4CF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		4FD60B29220D46F0004CB4CF /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		4FD60B29220D46F0004CB4CF /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		4FD60B2C220D46F0004CB4CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FD60B2E220D46F2004CB4CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FD60B31220D46F2004CB4CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -132,15 +138,18 @@
 		4FD60B24220D46F0004CB4CF /* Wildfire Lookout */ = {
 			isa = PBXGroup;
 			children = (
+				4F92E65F222347FB0002C442 /* LogInViewController.swift */,
+				4F92E661222364D80002C442 /* CreateNewUserViewController.swift */,
 				4FD60B25220D46F0004CB4CF /* AppDelegate.swift */,
 				4FD60B27220D46F0004CB4CF /* FirstViewController.swift */,
-				4FD60B29220D46F0004CB4CF /* SecondViewController.swift */,
+				4FD60B29220D46F0004CB4CF /* MapsViewController.swift */,
 				4FD60B2B220D46F0004CB4CF /* Main.storyboard */,
 				4FD60B2E220D46F2004CB4CF /* Assets.xcassets */,
 				4FD60B30220D46F2004CB4CF /* LaunchScreen.storyboard */,
 				4FD60B33220D46F2004CB4CF /* Info.plist */,
 				4FDC053A220FD9D000494C11 /* Mapbox.plist */,
 				4FDC053E2212454100494C11 /* GoogleMapsKeys.plist */,
+				4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */,
 			);
 			path = "Wildfire Lookout";
 			sourceTree = "<group>";
@@ -284,6 +293,7 @@
 			files = (
 				4FDC053F2212454100494C11 /* GoogleMapsKeys.plist in Resources */,
 				4FD60B32220D46F2004CB4CF /* LaunchScreen.storyboard in Resources */,
+				4F92E65E2220CAFC0002C442 /* GoogleService-Info.plist in Resources */,
 				4FD60B2F220D46F2004CB4CF /* Assets.xcassets in Resources */,
 				4FD60B2D220D46F0004CB4CF /* Main.storyboard in Resources */,
 			);
@@ -359,15 +369,31 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Wildfire Lookout/Pods-Wildfire Lookout-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -427,9 +453,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FD60B2A220D46F0004CB4CF /* SecondViewController.swift in Sources */,
+				4F92E660222347FB0002C442 /* LogInViewController.swift in Sources */,
+				4FD60B2A220D46F0004CB4CF /* MapsViewController.swift in Sources */,
 				4FD60B26220D46F0004CB4CF /* AppDelegate.swift in Sources */,
 				4FD60B28220D46F0004CB4CF /* FirstViewController.swift in Sources */,
+				4F92E662222364D80002C442 /* CreateNewUserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
