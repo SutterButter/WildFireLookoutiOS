@@ -53,9 +53,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow access to location in order to receive accurate alerts and notifications.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to determine location on the map</string>
-	<key>MGLMapboxAccessToken</key>
-	<string>pk.eyJ1IjoibnN1dHRlciIsImEiOiJjanJ5MTVsaXAwdGc1NDRvOWp1NTFlbW9hIn0.6vkHeX5NgiDzvPXMgCqsWw</string>
+	<string>Allow access to location in order to receive accurate alerts and notifications.</string>
 </dict>
 </plist>
