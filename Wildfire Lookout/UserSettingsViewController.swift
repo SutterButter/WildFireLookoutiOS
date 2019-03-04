@@ -13,6 +13,11 @@ class UserSettingsViewController: UIViewController {
 
     @IBAction func logOutPressed(_ sender: Any) {
         do {
+            // First get rid of cached data
+            var mapsTab = self.tabBarController?.viewControllers?[0] as! MapsViewController
+            mapsTab.detatchListeners()
+            
+            
             try Auth.auth().signOut()
             self.navigationController?.popViewController(animated: false)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

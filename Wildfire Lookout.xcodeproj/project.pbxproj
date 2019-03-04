@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		022DA7747197DE627CE1F45C /* Pods_Wildfire_LookoutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B9FD67731DEFEB725B54C /* Pods_Wildfire_LookoutTests.framework */; };
 		3E9C927F3D3F98A0F6CFE72C /* Pods_Wildfire_LookoutUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1ABF09FC81EAA5768FDB17 /* Pods_Wildfire_LookoutUITests.framework */; };
+		4F094D252227DD86005A998A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F094D242227DD86005A998A /* SecondViewController.swift */; };
 		4F3B782022237A140018096C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B781F22237A140018096C /* SplashViewController.swift */; };
 		4F3B78222223B0DA0018096C /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78212223B0DA0018096C /* UserSettingsViewController.swift */; };
 		4F92E65E2220CAFC0002C442 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		026AFAEC8BCB58B41867E3D3 /* Pods-Wildfire LookoutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildfire LookoutTests.debug.xcconfig"; path = "Target Support Files/Pods-Wildfire LookoutTests/Pods-Wildfire LookoutTests.debug.xcconfig"; sourceTree = "<group>"; };
 		458FEF12BA45C637C359D8E7 /* Pods-Wildfire Lookout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildfire Lookout.release.xcconfig"; path = "Target Support Files/Pods-Wildfire Lookout/Pods-Wildfire Lookout.release.xcconfig"; sourceTree = "<group>"; };
+		4F094D242227DD86005A998A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4F3B781F22237A140018096C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4F3B78212223B0DA0018096C /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				4FD60B29220D46F0004CB4CF /* MapsViewController.swift */,
 				4F3B78212223B0DA0018096C /* UserSettingsViewController.swift */,
 				4FD60B27220D46F0004CB4CF /* FirstViewController.swift */,
+				4F094D242227DD86005A998A /* SecondViewController.swift */,
 				4FD60B2B220D46F0004CB4CF /* Main.storyboard */,
 				4FD60B2E220D46F2004CB4CF /* Assets.xcassets */,
 				4FD60B30220D46F2004CB4CF /* LaunchScreen.storyboard */,
@@ -329,7 +332,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Wildfire Lookout/Pods-Wildfire Lookout-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -342,7 +345,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -409,6 +412,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Wildfire Lookout/Pods-Wildfire Lookout-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -416,6 +420,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
@@ -456,6 +461,7 @@
 				4F92E660222347FB0002C442 /* LogInViewController.swift in Sources */,
 				4FD60B2A220D46F0004CB4CF /* MapsViewController.swift in Sources */,
 				4F3B78222223B0DA0018096C /* UserSettingsViewController.swift in Sources */,
+				4F094D252227DD86005A998A /* SecondViewController.swift in Sources */,
 				4FD60B26220D46F0004CB4CF /* AppDelegate.swift in Sources */,
 				4F3B782022237A140018096C /* SplashViewController.swift in Sources */,
 				4FD60B28220D46F0004CB4CF /* FirstViewController.swift in Sources */,

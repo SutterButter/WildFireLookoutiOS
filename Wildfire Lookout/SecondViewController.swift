@@ -1,20 +1,19 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  Wildfire Lookout
 //
-//  Created by Noah Sutter on 2/8/19.
+//  Created by Noah Sutter on 2/28/19.
 //  Copyright © 2019 Noah Sutter. All rights reserved.
 //
 
+
 import UIKit
 
-class FirstViewController: UIViewController {
+class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
-    
     
     
     

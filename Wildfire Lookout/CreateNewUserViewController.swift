@@ -18,6 +18,7 @@ class CreateNewUserViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var db: Firestore!
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func createUserPressed(_ sender: Any) {
         // check email not empty
@@ -69,9 +70,8 @@ class CreateNewUserViewController: UIViewController {
         
         self.hideKeyboard()
 
-        let settings = FirestoreSettings()
-        Firestore.firestore().settings = settings
-        db = Firestore.firestore()
+        // Get database from app delegate
+        db = delegate.db
     }
 
     

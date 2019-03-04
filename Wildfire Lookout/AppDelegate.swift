@@ -15,6 +15,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var db: Firestore? = nil
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -31,8 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(secret)
         
-        // Set up firestore
+        // Set up fireebase
         FirebaseApp.configure()
+        
+        // Set up firestore database
+        db = Firestore.firestore()
+        let settings = db!.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        settings.isPersistenceEnabled = true
+        
+        db!.settings = settings
         
 
         
