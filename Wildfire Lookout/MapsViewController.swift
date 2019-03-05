@@ -14,8 +14,10 @@ import GeoFire
 import Geofirestore
 import MapKit
 
+// handles when auth changes so that user stays on page or leaves
 var handle: AuthStateDidChangeListenerHandle?
 
+// Holds a fire which is used to figure out if a perimeter needs to be loaded
 class Fire: NSObject {
     var maxLat: Double
     var minLat: Double
@@ -24,7 +26,7 @@ class Fire: NSObject {
     var latest: String
     var docID: String
     
-    init(fire: [String: Any], id: String) {
+    init(fire: [String: Any], id: String) { // inits a fire from object returned by firestore and its id
         maxLat = fire["MaxLat"] as? Double ?? 0.0
         minLat = fire["MinLat"] as? Double ?? 0.0
         maxLon = fire["MaxLon"] as? Double ?? 0.0
@@ -33,7 +35,7 @@ class Fire: NSObject {
         docID = id
     }
     
-    override func isEqual(_ object: Any?) -> Bool {
+    override func isEqual(_ object: Any?) -> Bool { // Allows to test if a fire has already been loaded
         if let object = object as? Fire {
             return maxLat == object.maxLat && minLat == object.minLat && maxLon == object.maxLon && minLon == object.minLon && latest == object.latest
         } else {
@@ -42,6 +44,7 @@ class Fire: NSObject {
     }
 }
 
+// Perimeter holds information necessary to draw a perimeter and other info related to the perimeter
 class Perimeter {
     var acres: Double
     var agency: String
@@ -56,7 +59,7 @@ class Perimeter {
     var uniqueFireIdentifier: String
     var unitIdentifier: String
     
-    init(perimeter: [String: Any]) {
+    init(perimeter: [String: Any]) { // inits a perimeter from the object returned by firestore
         acres = perimeter["Acres"] as? Double ?? 0.0
         agency = perimeter["Agency"] as? String ?? ""
         comments = perimeter["Comments"] as? String ?? ""
@@ -72,6 +75,7 @@ class Perimeter {
     }
 }
 
+// Firepoint contains informaiton about an individual fire location picked up from VIIRS or MODIS
 class FirePoint {
     var dateTime: Date
     var brightTI4: Double
@@ -85,8 +89,7 @@ class FirePoint {
     var location: GeoPoint
     var docId: String
     
-    init(firePoint: [String: Any], id: String) {
-        print(firePoint)
+    init(firePoint: [String: Any], id: String) { // inits a firepoint from the object returned by firestore and its id
         dateTime = firePoint["D"] as? Date ?? Date()
         brightTI4 = firePoint["4"] as? Double ?? 0.0
         brightTI5 = firePoint["5"] as? Double ?? 0.0
@@ -107,22 +110,84 @@ struct markerKey {
 
 class MapsViewController: UIViewController, GMSMapViewDelegate {
     
+    // The loading symbol at the top of the page
     var loadingIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     
+    // Information to be held that relate to fire perimeters
     var fires = [Fire]()
     var fetchedFires = [Fire]()
     var perimeters = [Perimeter]()
     
+    // The firestore database
     var db:Firestore? = nil
     
-    var geoFirestore:GeoFirestore?
-    var regionQuery:GFSRegionQuery?
-    
+    // The states to be queried for firepoints
     var states = ["CA", "TX", "FL"]
+    /*var states = [ "AK",
+                   "AL",
+                   "AR",
+                   "AS",
+                   "AZ",
+                   "CA",
+                   "CO",
+                   "CT",
+                   "DC",
+                   "DE",
+                   "FL",
+                   "GA",
+                   "GU",
+                   "HI",
+                   "IA",
+                   "ID",
+                   "IL",
+                   "IN",
+                   "KS",
+                   "KY",
+                   "LA",
+                   "MA",
+                   "MD",
+                   "ME",
+                   "MI",
+                   "MN",
+                   "MO",
+                   "MS",
+                   "MT",
+                   "NC",
+                   "ND",
+                   "NE",
+                   "NH",
+                   "NJ",
+                   "NM",
+                   "NV",
+                   "NY",
+                   "OH",
+                   "OK",
+                   "OR",
+                   "PA",
+                   "PR",
+                   "RI",
+                   "SC",
+                   "SD",
+                   "TN",
+                   "TX",
+                   "UT",
+                   "VA",
+                   "VI",
+                   "VT",
+                   "WA",
+                   "WI",
+                   "WV",
+                   "WY"]
+    */
+    var count = 0
+    
+    // Listeners are tracked so that they can be detatched in the event a user signs out
     var listeners = [ListenerRegistration]()
     
+    // The delegate is needed in order to set the firestore database with the same settings across multiple pages
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
+    // When the view should appear we need to check if the viewer can access the screen or if they need to be logged in
     override func viewWillAppear(_ animated: Bool) {
         
         // If signed in stay on the page if not go back to login
@@ -132,14 +197,14 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
             } else { // no user signed in, go back to login screen
                 print("NO USER SIGNED IN")
                 self.performSegue(withIdentifier: "mapsToSignInSegue", sender: self)
+                //TODO: Should listeners be detatched here?
             }
         }
     }
     
+    // Sets up the map, locaiton manager, and initial loading of perimeters and firepoints
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         // Get Current Location
         let locationManager = CLLocationManager()
@@ -174,42 +239,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
         // Get fire perimeters based on initial map size
         fetchFirePerimeters(mapView: mapView)
         
+        //Get firepoints
         getFirePoints(states: states, mapView: mapView)
-        // Get firepoints
-        
-        
-        
-        
-        
-//        // Get all firepoints
-//        print("Fetching Firepoints")
-//        let geoFirestoreRef = Firestore.firestore().collection("firepoints")
-//        geoFirestore = GeoFirestore(collectionRef: geoFirestoreRef)
-        
-        
-        // Setting the firepoints region then defining what to do with documents
-        //let region = getFirePointsRegion(mapView: mapView)
-//        //regionQuery = geoFirestore?.query(inRegion: region)
-//
-//        print("Region Set")
-//        print(region)
-//
-//        let _ = regionQuery!.observe(.documentEntered, with: { (key, location) in
-//            print("GOT DOCUMENT!!!")
-//            //print("The document with documentID '\(String(describing: key))' entered the search area and is at location '\(String(describing: location))'")
-//
-//            let firePoint = GMSMarker(position: location!.coordinate)
-//            firePoint.title = "Fire Point"
-//            if (key != nil) {
-//                firePoint.userData = markerKey(key: key!)
-//            }
-//            //firePoint.icon = UIImage(named: "fire_perimeter_small")
-//            firePoint.map = mapView
-//        })
-        
-        print("Observe set")
     }
     
+    // This function detatches all listeners, it is used by the logout method
     func detatchListeners() {
         for listener in listeners {
             listener.remove()
@@ -221,8 +255,9 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
         return CLLocationCoordinate2D(latitude: CLLocationDegrees(exactly: point.latitude)!, longitude: CLLocationDegrees(exactly: point.longitude)!)
     }
     
+    // Gets all the firepoints needed by the states selected and adds them to the map
     func getFirePoints(states: [String], mapView: GMSMapView) {
-        var query = db!.collection("fp")
+        let query = db!.collection("fp")
         for state in states {
             let listener: ListenerRegistration = query.whereField("state", isEqualTo: state)
                 .addSnapshotListener { querySnapshot, error in
@@ -238,9 +273,12 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
                             let data = diff.document.data()
                             let points = data["points"] as? [[String: Any]] ?? [[String: Any]]()
                             
+                            let circle = UIImage(named: "red_circle")
+                            self.count += points.count
+                            print(self.count)
                             for point in points {
                                 print("Point")
-                                var firePoint = FirePoint(firePoint: point, id: diff.document.documentID)
+                                let firePoint = FirePoint(firePoint: point, id: diff.document.documentID)
                                 
                                 // Add a point for the main part of the fire perimeter
                                 let position = firePoint.location
@@ -249,50 +287,52 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
                                 // Scan is E/W
                                 // lat is N/S
                                 // Track is N/S
-                                let dxDegrees = firePoint.scan/(111.0 * cos(position.latitude)) // East-west distance in degrees
-                                let dyDegrees = firePoint.track/111.0        // North-south distance in degrees
-                                
-                                let minLat = position.latitude - dyDegrees
-                                let maxLat = position.latitude + dyDegrees
-                                let minLon = position.longitude - dxDegrees
-                                let maxLon = position.longitude + dxDegrees
-                                
-                                let v1 = CLLocationCoordinate2D(latitude: minLat, longitude: minLon)
-                                let v2 = CLLocationCoordinate2D(latitude: minLat, longitude: maxLon)
-                                let v3 = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLon)
-                                let v4 = CLLocationCoordinate2D(latitude: maxLat, longitude: minLon)
-                                
-                                
-                                let path = GMSMutablePath()
-                                path.add(v1)
-                                path.add(v2)
-                                path.add(v3)
-                                path.add(v4)
-                                
-                                let polygon = GMSPolygon(path: path)
-                                polygon.fillColor = UIColor(red: 1.0, green: 0.5, blue: 0, alpha: 0.25)
-                                polygon.strokeColor = .orange
-                                polygon.strokeWidth = 2
-                                polygon.map = mapView
+//                                let dxDegrees = firePoint.scan/(111.0 * cos(position.latitude)) // East-west distance in degrees
+//                                let dyDegrees = firePoint.track/111.0        // North-south distance in degrees
+//
+//                                let minLat = position.latitude - dyDegrees
+//                                let maxLat = position.latitude + dyDegrees
+//                                let minLon = position.longitude - dxDegrees
+//                                let maxLon = position.longitude + dxDegrees
+//
+//                                let v1 = CLLocationCoordinate2D(latitude: minLat, longitude: minLon)
+//                                let v2 = CLLocationCoordinate2D(latitude: minLat, longitude: maxLon)
+//                                let v3 = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLon)
+//                                let v4 = CLLocationCoordinate2D(latitude: maxLat, longitude: minLon)
+//
+//
+//                                let path = GMSMutablePath()
+//                                path.add(v1)
+//                                path.add(v2)
+//                                path.add(v3)
+//                                path.add(v4)
+//
+//                                let polygon = GMSPolygon(path: path)
+//                                polygon.fillColor = UIColor(red: 1.0, green: 0.5, blue: 0, alpha: 0.25)
+//                                polygon.strokeColor = .orange
+//                                polygon.strokeWidth = 2
+//                                polygon.map = mapView
                                 //{(f-df,l-dl), (f+df,l-dl), (f+df,l+dl), (f-df,l+dl)} // List of vertices
                                 
-                                
+//
+//                                let circ = GMSCircle(position: self.geoPointToCLLPoint(point: position), radius: 1000)
+//                                circ.map = mapView
+
                                 let fireMarker = GMSMarker(position: self.geoPointToCLLPoint(point: position))
                                 fireMarker.title = "Fire"
-                                //firePoint.icon = UIImage(named: "fire_perimeter_small")
-                                fireMarker.icon = GMSMarker.markerImage(with: .orange)
+                                fireMarker.icon = circle
                                 fireMarker.map = mapView
                             }
                             
-                            print("New state: \(diff.document.data())")
+                            //print("New state: \(diff.document.data())")
                         }
                         if (diff.type == .modified) {
                             //var firePoint = FirePoint(firePoint: diff.document.data(), id: diff.document.documentID)
-                            print("Modified state: \(diff.document.data())")
+                            //print("Modified state: \(diff.document.data())")
                         }
                         if (diff.type == .removed) {
                             //var firePoint = FirePoint(firePoint: diff.document.data(), id: diff.document.documentID)
-                            print("Removed state: \(diff.document.data())")
+                            //print("Removed state: \(diff.document.data())")
                         }
                     }
             }
@@ -441,32 +481,32 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
 //        return false
 //    }
 
-    // Gets a region to query
-    func getFirePointsRegion(mapView: GMSMapView) -> MKCoordinateRegion {
-        print("Querying for new points")
-        
-        // Getting corner lat/lons which we will use to specify which perimeters to load
-        let (maxLat, minLat, maxLon, minLon) = getMinMaxLatLon(mapView: mapView)
-        
-        if ((maxLat == -180.0 && minLat == -180.0 && maxLon == -180.0 && minLon == -180.0) || (maxLat == -90.0 && minLat == 90.0 && maxLon == -180.0 && minLon == 180.0)) {
-            let center = CLLocation(latitude: 36.7783, longitude: -119.4179)
-            let span = MKCoordinateSpan(latitudeDelta: 0.0, longitudeDelta: 0.0)
-            let region = MKCoordinateRegion(center: center.coordinate, span: span)
-            return region
-        }
-        
-        let latDelta = maxLat - minLat
-        let lonDelta = maxLon - minLon
-        
-        let centerLat = minLat + (latDelta / 2.0)
-        let centerLon = minLon + (lonDelta / 2.0)
-        
-        // Query using a region
-        let center = CLLocation(latitude: centerLat, longitude: centerLon)
-        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
-        let region = MKCoordinateRegion(center: center.coordinate, span: span)
-        print("returning region")
-        return region
-    }
+//    // Gets a region to query
+//    func getFirePointsRegion(mapView: GMSMapView) -> MKCoordinateRegion {
+//        print("Querying for new points")
+//
+//        // Getting corner lat/lons which we will use to specify which perimeters to load
+//        let (maxLat, minLat, maxLon, minLon) = getMinMaxLatLon(mapView: mapView)
+//
+//        if ((maxLat == -180.0 && minLat == -180.0 && maxLon == -180.0 && minLon == -180.0) || (maxLat == -90.0 && minLat == 90.0 && maxLon == -180.0 && minLon == 180.0)) {
+//            let center = CLLocation(latitude: 36.7783, longitude: -119.4179)
+//            let span = MKCoordinateSpan(latitudeDelta: 0.0, longitudeDelta: 0.0)
+//            let region = MKCoordinateRegion(center: center.coordinate, span: span)
+//            return region
+//        }
+//
+//        let latDelta = maxLat - minLat
+//        let lonDelta = maxLon - minLon
+//
+//        let centerLat = minLat + (latDelta / 2.0)
+//        let centerLon = minLon + (lonDelta / 2.0)
+//
+//        // Query using a region
+//        let center = CLLocation(latitude: centerLat, longitude: centerLon)
+//        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+//        let region = MKCoordinateRegion(center: center.coordinate, span: span)
+//        print("returning region")
+//        return region
+//    }
 }
 
