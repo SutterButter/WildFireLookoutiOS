@@ -117,4 +117,26 @@ class AlertsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+    
+    // These two funcitons allow for swipe to delete
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            let alert = alerts[indexPath.row]
+            db!.collection("watchLocations").document(alert.id).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                    let alert = UIAlertController(title: "Error Removing Alert", message: "Error: \(err).", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+        }
+    }
 }
