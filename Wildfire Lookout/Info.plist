@@ -54,7 +54,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Allow access to location in order to receive accurate alerts and notifications.</string>
+	<string>To allow for accurate location based alerts. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow access to location in order to receive accurate alerts and notifications.</string>
 </dict>

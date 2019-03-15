@@ -40,20 +40,26 @@ class CreateNewUserViewController: UIViewController {
                     self.present(alert, animated: true, completion: nil)
                 } else if let userId = authResult?.user.uid {
                     
-                    // Store name in user database
-                    self.db.collection("users").document(userId).setData([
-                        "firstName": firstName,
-                        "lastName": lastName,
-                        "email": email
-                    ]) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            // Document written, go to landing screen
-                            print("Document successfully written!")
-                            self.performSegue(withIdentifier: "createUserToLandingSegue", sender: self)
+                    // Write with or without FCM Token
+                    InstanceID.instanceID().instanceID { (result, error) in
+                        if let error = error { // if we cannot get the FCM token write without it
+                            // Store name in user database
+                            self.writeUser(userId: userId, doc: [
+                                "firstName": firstName,
+                                "lastName": lastName,
+                                "email": email])
+                            print("Error fetching remote instance ID: \(error)")
+                        } else if let result = result { // otherwise we set the FCM token
+                            print("Remote instance ID token: \(result.token)")
+                            // Store name in user database
+                            self.writeUser(userId: userId, doc: [
+                                "firstName": firstName,
+                                "lastName": lastName,
+                                "email": email,
+                                "iOSFCMToken": result.token])
                         }
                     }
+                    
                 } else {
                     print("SOMETHING WEIRD IS HAPPENING")
                 }
@@ -74,7 +80,17 @@ class CreateNewUserViewController: UIViewController {
         db = delegate.db
     }
 
-    
+    func writeUser(userId: String, doc: [String: Any]) {
+        self.db.collection("users").document(userId).setData(doc) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                // Document written, go to landing screen
+                print("Document successfully written!")
+                self.performSegue(withIdentifier: "createUserToLandingSegue", sender: self)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

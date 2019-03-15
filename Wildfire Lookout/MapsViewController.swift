@@ -268,16 +268,16 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
                     snapshot.documentChanges.forEach { diff in
                         
                         if (diff.type == .added) {
-                            print("New state: \(diff.document.data())")
-                            print("Added")
+                            //print("New state: \(diff.document.data())")
+                            //print("Added")
                             let data = diff.document.data()
                             let points = data["points"] as? [[String: Any]] ?? [[String: Any]]()
                             
                             let circle = UIImage(named: "red_circle")
                             self.count += points.count
-                            print(self.count)
+                            //print(self.count)
                             for point in points {
-                                print("Point")
+                                //print("Point")
                                 let firePoint = FirePoint(firePoint: point, id: diff.document.documentID)
                                 
                                 // Add a point for the main part of the fire perimeter
@@ -354,7 +354,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
                     for document in querySnapshot!.documents {
                         let fire = Fire(fire: document.data(), id: document.documentID)
                         self.fires.append(fire)
-                        print("Loaded: \(document.documentID) => \(document.data())")
+                        //print("Loaded: \(document.documentID) => \(document.data())")
                     }
                 }
                 self.loadingIndicator.stopAnimating()
@@ -378,10 +378,10 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
         let maxLon = lons.max() ?? -180.0
         let minLon = lons.min() ?? 180.0
         
-        print(maxLat)
-        print(minLat)
-        print(maxLon)
-        print(minLon)
+        //print(maxLat)
+        //print(minLat)
+        //print(maxLon)
+        //print(minLon)
         
         return (maxLat, minLat, maxLon, minLon)
     }
@@ -435,7 +435,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate {
                         firePoint.icon = GMSMarker.markerImage(with: .red)
                         firePoint.map = mapView
                         
-                        print("Fetched document: \(fire.latest) for fire: \(perimeter.fireName)")
+                        //print("Fetched document: \(fire.latest) for fire: \(perimeter.fireName)")
                         self.fetchedFires.append(fire) // making sure the fire is not loaded again
                     } else {
                         print("Document does not exist")

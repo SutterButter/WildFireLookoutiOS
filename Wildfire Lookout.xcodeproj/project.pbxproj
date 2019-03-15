@@ -15,6 +15,8 @@
 		4F92E65E2220CAFC0002C442 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */; };
 		4F92E660222347FB0002C442 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92E65F222347FB0002C442 /* LogInViewController.swift */; };
 		4F92E664222368DA0002C442 /* CreateNewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92E663222368DA0002C442 /* CreateNewUserViewController.swift */; };
+		4FA7A98822338ABC008174D2 /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A98722338ABC008174D2 /* AlertTableViewCell.swift */; };
+		4FA7A98A2233A814008174D2 /* AlertTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A9892233A814008174D2 /* AlertTableViewController.swift */; };
 		4FD60B26220D46F0004CB4CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B25220D46F0004CB4CF /* AppDelegate.swift */; };
 		4FD60B28220D46F0004CB4CF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B27220D46F0004CB4CF /* FirstViewController.swift */; };
 		4FD60B2A220D46F0004CB4CF /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B29220D46F0004CB4CF /* MapsViewController.swift */; };
@@ -24,6 +26,10 @@
 		4FD60B3D220D46F2004CB4CF /* Wildfire_LookoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B3C220D46F2004CB4CF /* Wildfire_LookoutTests.swift */; };
 		4FD60B48220D46F2004CB4CF /* Wildfire_LookoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD60B47220D46F2004CB4CF /* Wildfire_LookoutUITests.swift */; };
 		4FDC053F2212454100494C11 /* GoogleMapsKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FDC053E2212454100494C11 /* GoogleMapsKeys.plist */; };
+		4FFB89F72239A4E40099928B /* SelectPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB89F62239A4E40099928B /* SelectPlaceViewController.swift */; };
+		4FFB8A03223B11B70099928B /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB8A02223B11B70099928B /* AlertsViewController.swift */; };
+		4FFCF93B223772410038CF3F /* AlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFCF93A223772410038CF3F /* AlertSettings.swift */; };
+		4FFCF9B32239935D0038CF3F /* SetAlertSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFCF9B22239935D0038CF3F /* SetAlertSettingsViewController.swift */; };
 		DA1B4795477EBA3AF97958B9 /* Pods_Wildfire_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924D667426DA5EF5233F1E6C /* Pods_Wildfire_Lookout.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +59,9 @@
 		4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F92E65F222347FB0002C442 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		4F92E663222368DA0002C442 /* CreateNewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewUserViewController.swift; sourceTree = "<group>"; };
+		4FA7A986223253D6008174D2 /* Wildfire Lookout.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wildfire Lookout.entitlements"; sourceTree = "<group>"; };
+		4FA7A98722338ABC008174D2 /* AlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
+		4FA7A9892233A814008174D2 /* AlertTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTableViewController.swift; sourceTree = "<group>"; };
 		4FD60B22220D46F0004CB4CF /* Wildfire Lookout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wildfire Lookout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD60B25220D46F0004CB4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FD60B27220D46F0004CB4CF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +77,10 @@
 		4FD60B47220D46F2004CB4CF /* Wildfire_LookoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wildfire_LookoutUITests.swift; sourceTree = "<group>"; };
 		4FD60B49220D46F2004CB4CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FDC053E2212454100494C11 /* GoogleMapsKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GoogleMapsKeys.plist; sourceTree = "<group>"; };
+		4FFB89F62239A4E40099928B /* SelectPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaceViewController.swift; sourceTree = "<group>"; };
+		4FFB8A02223B11B70099928B /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
+		4FFCF93A223772410038CF3F /* AlertSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettings.swift; sourceTree = "<group>"; };
+		4FFCF9B22239935D0038CF3F /* SetAlertSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlertSettingsViewController.swift; sourceTree = "<group>"; };
 		500845B63C4A47FA2A5169FC /* Pods-Wildfire Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildfire Lookout.debug.xcconfig"; path = "Target Support Files/Pods-Wildfire Lookout/Pods-Wildfire Lookout.debug.xcconfig"; sourceTree = "<group>"; };
 		67212CA864B2111F7C982B90 /* Pods-Wildfire LookoutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildfire LookoutTests.release.xcconfig"; path = "Target Support Files/Pods-Wildfire LookoutTests/Pods-Wildfire LookoutTests.release.xcconfig"; sourceTree = "<group>"; };
 		924D667426DA5EF5233F1E6C /* Pods_Wildfire_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wildfire_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,20 +166,27 @@
 		4FD60B24220D46F0004CB4CF /* Wildfire Lookout */ = {
 			isa = PBXGroup;
 			children = (
+				4FA7A986223253D6008174D2 /* Wildfire Lookout.entitlements */,
+				4FD60B25220D46F0004CB4CF /* AppDelegate.swift */,
 				4F3B781F22237A140018096C /* SplashViewController.swift */,
 				4F92E65F222347FB0002C442 /* LogInViewController.swift */,
 				4F92E663222368DA0002C442 /* CreateNewUserViewController.swift */,
-				4FD60B25220D46F0004CB4CF /* AppDelegate.swift */,
 				4FD60B29220D46F0004CB4CF /* MapsViewController.swift */,
 				4F3B78212223B0DA0018096C /* UserSettingsViewController.swift */,
 				4FD60B27220D46F0004CB4CF /* FirstViewController.swift */,
 				4F094D242227DD86005A998A /* SecondViewController.swift */,
+				4FFB8A02223B11B70099928B /* AlertsViewController.swift */,
+				4FFCF9B22239935D0038CF3F /* SetAlertSettingsViewController.swift */,
+				4FFB89F62239A4E40099928B /* SelectPlaceViewController.swift */,
+				4FFCF93A223772410038CF3F /* AlertSettings.swift */,
 				4FD60B2B220D46F0004CB4CF /* Main.storyboard */,
 				4FD60B2E220D46F2004CB4CF /* Assets.xcassets */,
 				4FD60B30220D46F2004CB4CF /* LaunchScreen.storyboard */,
 				4FD60B33220D46F2004CB4CF /* Info.plist */,
 				4FDC053E2212454100494C11 /* GoogleMapsKeys.plist */,
 				4F92E65D2220CAFB0002C442 /* GoogleService-Info.plist */,
+				4FA7A9892233A814008174D2 /* AlertTableViewController.swift */,
+				4FA7A98722338ABC008174D2 /* AlertTableViewCell.swift */,
 			);
 			path = "Wildfire Lookout";
 			sourceTree = "<group>";
@@ -262,6 +282,11 @@
 				TargetAttributes = {
 					4FD60B21220D46F0004CB4CF = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					4FD60B37220D46F2004CB4CF = {
 						CreatedOnToolsVersion = 10.1;
@@ -414,6 +439,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Wildfire Lookout/Pods-Wildfire Lookout-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -422,6 +448,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,10 +485,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA7A98822338ABC008174D2 /* AlertTableViewCell.swift in Sources */,
 				4F92E660222347FB0002C442 /* LogInViewController.swift in Sources */,
 				4FD60B2A220D46F0004CB4CF /* MapsViewController.swift in Sources */,
 				4F3B78222223B0DA0018096C /* UserSettingsViewController.swift in Sources */,
+				4FA7A98A2233A814008174D2 /* AlertTableViewController.swift in Sources */,
+				4FFCF93B223772410038CF3F /* AlertSettings.swift in Sources */,
 				4F094D252227DD86005A998A /* SecondViewController.swift in Sources */,
+				4FFB89F72239A4E40099928B /* SelectPlaceViewController.swift in Sources */,
+				4FFCF9B32239935D0038CF3F /* SetAlertSettingsViewController.swift in Sources */,
+				4FFB8A03223B11B70099928B /* AlertsViewController.swift in Sources */,
 				4FD60B26220D46F0004CB4CF /* AppDelegate.swift in Sources */,
 				4F3B782022237A140018096C /* SplashViewController.swift in Sources */,
 				4FD60B28220D46F0004CB4CF /* FirstViewController.swift in Sources */,
@@ -641,6 +674,7 @@
 			baseConfigurationReference = 500845B63C4A47FA2A5169FC /* Pods-Wildfire Lookout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Wildfire Lookout/Wildfire Lookout.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KXWDJEL2WR;
 				INFOPLIST_FILE = "Wildfire Lookout/Info.plist";
@@ -661,6 +695,7 @@
 			baseConfigurationReference = 458FEF12BA45C637C359D8E7 /* Pods-Wildfire Lookout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Wildfire Lookout/Wildfire Lookout.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KXWDJEL2WR;
 				INFOPLIST_FILE = "Wildfire Lookout/Info.plist";

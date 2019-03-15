@@ -9,6 +9,9 @@
 import UIKit
 import GoogleMaps
 import Firebase
+import UserNotifications
+import GooglePlaces
+import GooglePlacePicker
 
 
 @UIApplicationMain
@@ -16,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var db: Firestore? = nil
+    let gcmMessageIDKey = "gcm.message_id"
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -29,8 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             print("unable to get keys")
         }
-        
         GMSServices.provideAPIKey(secret)
+        
+        // Set up Google Places
+        //GMSPlacesClient.provideAPIKey(secret)
+        GMSPlacesClient.provideAPIKey(secret)
+        
         
         // Set up fireebase
         FirebaseApp.configure()
@@ -40,8 +48,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = db!.settings
         settings.areTimestampsInSnapshotsEnabled = true
         settings.isPersistenceEnabled = true
-        
         db!.settings = settings
+        
+        // Set up notifications
+        Messaging.messaging().delegate = self
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
         
 
         
@@ -73,3 +99,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+@available(iOS 10, *)
+extension AppDelegate : UNUserNotificationCenterDelegate {
+    
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler()
+    }
+}
+
+extension AppDelegate : MessagingDelegate {
+    // [START refresh_token]
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // TODO: If necessary send token to application server.
+        // Store name in user database
+        
+        
+        if let user = Auth.auth().currentUser { // User is signed in.
+            self.db!.collection("users").document(user.uid).updateData([
+                "iOSFCMToken": fcmToken
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    // Document written
+                    print("FCM Token successfully written!")
+                }
+            }
+        } else { // No user is signed in.
+            print("ERROR: No user signed in yet received FCM Token.")
+        }
+        
+        
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    // [END refresh_token]
+    // [START ios_10_data_message]
+    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+}
